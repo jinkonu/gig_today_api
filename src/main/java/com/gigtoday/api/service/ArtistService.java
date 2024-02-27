@@ -1,6 +1,5 @@
 package com.gigtoday.api.service;
 
-import com.gigtoday.api.domain.Artist;
 import com.gigtoday.api.repository.ArtistRepository;
 import com.gigtoday.api.util.dto.ArtistJoinDto;
 import lombok.RequiredArgsConstructor;
