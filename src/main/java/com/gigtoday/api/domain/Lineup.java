@@ -1,7 +1,9 @@
 package com.gigtoday.api.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class Lineup {
 
