@@ -1,7 +1,7 @@
 package com.gigtoday.api.service;
 
+import com.gigtoday.api.repository.ArtistRepository;
 import com.gigtoday.api.repository.GigRepository;
-import com.gigtoday.api.repository.LineupRepository;
 import com.gigtoday.api.repository.VenueRepository;
 import com.gigtoday.api.util.dto.GigJoinDto;
 import com.gigtoday.api.util.dto.GigTodayDto;
@@ -21,14 +21,14 @@ public class GigService {
 
     public final GigRepository gigRepository;
     public final VenueRepository venueRepository;
-    public final LineupRepository lineupRepository;
+    public final ArtistRepository artistRepository;
 
 
     public Long join(GigJoinDto dto) {
         return gigRepository.save(dto.toEntity(
-                venueRepository.findById(dto.getVenudId()).orElseThrow(),
-                dto.getLineupIds().stream()
-                        .map((lineupId) -> lineupRepository.findById(lineupId).orElseThrow())
+                venueRepository.findById(dto.getVenueId()).orElseThrow(),
+                dto.getArtistIds().stream()
+                        .map((artistId) -> artistRepository.findById(artistId).orElseThrow())
                         .toList()
         )).getId();
     }

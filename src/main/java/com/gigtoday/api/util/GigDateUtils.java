@@ -9,7 +9,7 @@ public class GigDateUtils {
     public static final LocalDateTime endOfDay = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
 
 
-    private static final String dateTimeDelimiter = "'T'";
+    private static final String dateTimeDelimiter = "T";
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
     public static LocalDateTime of(String date, String time) {

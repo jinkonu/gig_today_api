@@ -1,5 +1,6 @@
 package com.gigtoday.api.util.dto;
 
+import com.gigtoday.api.domain.Artist;
 import com.gigtoday.api.domain.Gig;
 import com.gigtoday.api.domain.Lineup;
 import com.gigtoday.api.domain.Venue;
@@ -19,10 +20,10 @@ public class GigJoinDto {
     private String endTime;
     private int ticketPrice;
     private String notice;
-    private Long venudId;
-    private List<Long> lineupIds;
+    private Long venueId;
+    private List<Long> artistIds;
 
-    public Gig toEntity(Venue venue, List<Lineup> lineups) {
+    public Gig toEntity(Venue venue, List<Artist> artists) {
         return Gig.builder()
                 .name(name)
                 .startTime(GigDateUtils.of(date, startTime))
@@ -30,7 +31,7 @@ public class GigJoinDto {
                 .ticketPrice(ticketPrice)
                 .notice(notice)
                 .venue(venue)
-                .lineups(lineups)
+                .lineups(Lineup.with(artists))
                 .build();
     }
 }
