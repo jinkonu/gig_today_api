@@ -38,6 +38,6 @@ public class Gig {
     @JoinColumn(name = "venue_id")
     private Venue venue;
 
-    @OneToMany(mappedBy = "gig")
+    @OneToMany(mappedBy = "gig", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lineup> lineups = new ArrayList<>();
 }
