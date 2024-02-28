@@ -1,12 +1,10 @@
 package com.gigtoday.api.util.dto;
 
-import com.gigtoday.api.domain.Artist;
-import com.gigtoday.api.domain.Gig;
-import com.gigtoday.api.domain.Lineup;
-import com.gigtoday.api.domain.Venue;
+import com.gigtoday.api.domain.*;
 import com.gigtoday.api.util.GigDateUtils;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,13 +21,14 @@ public class GigJoinDto {
     private Long venueId;
     private List<Long> artistIds;
 
-    public Gig toEntity(Venue venue, List<Artist> artists) {
+    public Gig toEntity(List<File> images, Venue venue, List<Artist> artists) {
         return Gig.builder()
                 .name(name)
                 .startTime(GigDateUtils.of(date, startTime))
                 .endTime(GigDateUtils.of(date, endTime))
                 .ticketPrice(ticketPrice)
                 .notice(notice)
+                .images(images)
                 .venue(venue)
                 .lineups(Lineup.with(artists))
                 .build();
