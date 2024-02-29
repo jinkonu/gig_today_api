@@ -21,16 +21,19 @@ public class GigJoinDto {
     private Long venueId;
     private List<Long> artistIds;
 
-    public Gig toEntity(List<File> images, Venue venue, List<Artist> artists) {
-        return Gig.builder()
+    public Gig toEntity(List<MultipartFile> images, Venue venue, List<Artist> artists) {
+        Gig gig = Gig.builder()
                 .name(name)
                 .startTime(GigDateUtils.of(date, startTime))
                 .endTime(GigDateUtils.of(date, endTime))
                 .ticketPrice(ticketPrice)
                 .notice(notice)
-                .images(images)
                 .venue(venue)
-                .lineups(Lineup.with(artists))
                 .build();
+
+        gig.addImages(images);
+        gig.addLineups(artists);
+
+        return gig;
     }
 }

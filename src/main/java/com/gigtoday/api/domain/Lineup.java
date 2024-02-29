@@ -1,10 +1,7 @@
 package com.gigtoday.api.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +10,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
+@Getter @Setter
 @Entity
 public class Lineup {
 

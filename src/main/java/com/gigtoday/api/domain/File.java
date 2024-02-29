@@ -5,12 +5,14 @@ import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
+@Getter @Setter
 @Entity
 public class File {
 
@@ -48,5 +50,12 @@ public class File {
 
     private static String setSavedNameFrom(String originalName) {
         return UUID.randomUUID() + "." + originalName;
+    }
+
+    @SneakyThrows(IOException.class)
+    public byte[] toByteArray() {
+        Path path = new java.io.File(filePath + savedName).toPath();
+
+        return Files.readAllBytes(path);
     }
 }

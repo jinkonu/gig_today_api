@@ -30,11 +30,12 @@ public class Gig {
     private int ticketPrice;
     private String notice;
 
-
     /* Related data */
+    @Builder.Default
     @OneToMany(mappedBy = "gig", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<File> images = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "gig")
     private List<Ticket> tickets = new ArrayList<>();
 
@@ -42,6 +43,25 @@ public class Gig {
     @JoinColumn(name = "venue_id")
     private Venue venue;
 
+    @Builder.Default
     @OneToMany(mappedBy = "gig", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Lineup> lineups = new ArrayList<>();
+
+
+    /* Domain logic */
+    public void addImages(List<MultipartFile> files) {
+        List<File> images = files.stream()
+                .map(File::of)
+                .toList();
+
+        this.images = images;
+        images.forEach(image -> image.setGig(this));
+    }
+
+    public void addLineups(List<Artist> artists) {
+        List<Lineup> lineups = Lineup.with(artists);
+
+        this.lineups = lineups;
+        lineups.forEach(lineup -> lineup.setGig(this));
+    }
 }
